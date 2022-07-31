@@ -1,20 +1,23 @@
-
 var btn = document.querySelector("button");
+btn.addEventListener("click",setTimer);
+var secondsLeft = 15;
+var timeEl = document.querySelector(".showtime");
+var questions = [];//json objects for all 4 buttons and questions in array. 
 
 
-function setTime() {
-    // Sets interval in variable
+function setTimer() {
+//unhide card element when start button clicked
+//test commit
     var timerInterval = setInterval(function() {
       secondsLeft--;
-      timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
+      btn.textContent = secondsLeft;
   
       if(secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
-        // Calls function to create and append image
-        sendMessage();
+
+        btn.textContent = ("game over!");
       }
   
     }, 1000);
   }
-  btn.addEventListener("click",setTime);
