@@ -9,6 +9,7 @@ function setTimer() {
 //unhide card element when start button clicked
 //test commit
 //test commit new email
+var thiscode = ("please use new email... :(");
     var timerInterval = setInterval(function() {
       secondsLeft--;
       btn.textContent = secondsLeft;
