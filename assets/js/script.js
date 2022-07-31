@@ -8,6 +8,7 @@ var questions = [];//json objects for all 4 buttons and questions in array.
 function setTimer() {
 //unhide card element when start button clicked
 //test commit
+//test commit new email
     var timerInterval = setInterval(function() {
       secondsLeft--;
       btn.textContent = secondsLeft;
