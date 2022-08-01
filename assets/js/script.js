@@ -1,7 +1,16 @@
 var btn = document.querySelector("button");
 btn.addEventListener("click", setTimer);
-var secondsLeft = 15;
+var question = document.querySelector("#question");
+var op1 = document.querySelector("#op1");
+var op2 = document.querySelector("#op2");
+var op3 = document.querySelector("#op3");
+var answer = document.querySelector("#answer");
+var secondsLeft = 60;
+
+// const delay = async (ms = 1000) =>
+//   new Promise(resolve => setTimeout(resolve, ms));
 var timeEl = document.querySelector(".showtime");
+var i = 0;
 var questions = [
   {
     question: "What is an array?",
@@ -43,9 +52,8 @@ var questions = [
 
 function setTimer() {
   //unhide card element when start button clicked
-  //test commit
-  //test commit new email
-  var thiscode = ("please use new email... :(");
+  document.getElementById("card").style.display = "block";
+  runCards();
   var timerInterval = setInterval(function () {
     secondsLeft--;
     btn.textContent = secondsLeft;
@@ -54,8 +62,52 @@ function setTimer() {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
 
+      document.getElementById("card").style.display = "none";
+
       btn.textContent = ("game over!");
     }
 
   }, 1000);
+}
+
+const  runCards=() =>{
+
+    document.getElementById("question").textContent = questions[i].question;
+    op1.textContent = questions[i].op1;
+    op2.textContent = questions[i].op2;
+    op3.textContent = questions[i].op3;
+    op1.addEventListener("click",function(){checkAnswer(op1.innerHTML)});
+    op2.addEventListener("click",function(){checkAnswer(op2.innerHTML)});
+    op3.addEventListener("click",function(){checkAnswer(op3.innerHTML)});
+    //await delay(secondsLeft/.001);//convert Seconds to ms
+    
+}
+
+function checkAnswer(input){
+if (input===questions[i].answer && i < questions.length){
+
+  window.alert("Correct!");
+
+  op1.removeEventListener("click",function(){checkAnswer(op1.innerHTML)});
+  op2.removeEventListener("click",function(){checkAnswer(op2.innerHTML)});
+  op3.removeEventListener("click",function(){checkAnswer(op3.innerHTML)});
+  i++;
+
+}
+else if (input!==questions[i].answer && i < questions.length){
+
+  window.alert("WRONG: "+questions[i].answer);
+
+  op1.removeEventListener("click",function(){checkAnswer(op1.innerHTML)});
+  op2.removeEventListener("click",function(){checkAnswer(op2.innerHTML)});
+  op3.removeEventListener("click",function(){checkAnswer(op3.innerHTML)});
+  i++
+
+}
+else{
+  window.alert("out of questions");
+  document.getElementById("card").style.display = "none";
+}
+//i++;
+setTimeout(runCards(),0);
 }
