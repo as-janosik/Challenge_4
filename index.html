@@ -1,40 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Quiz Time</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./assets/css/reset.css">
-        <link rel="stylesheet" href="./assets/css/style.css">
-    </head>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quiz Time</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <Header>
+        <h1>Lets Take A Quiz!</h1>
+    </Header>
+
     <body>
-        <Header>
-            <h1>Lets Take A Quiz!</h1>
-        </Header>
-
-        <body>
-            <div>
-                <h2>Click button to start!</h2>
-            <button>Start</button>
+        <div div="timer">
+            <h2>Click button to start!</h2>
+            <button id="start">Start</button>
+        </div>
+        <div id="card">
+            <div id="question">
             </div>
-            <div id="card">
-                <div id="question">
-                </div>
-                <div id="multi-choice">
-                    <button class="option" id="op1"></button>
-                    <button class="option" id="op2"></button>
-                    <button class="option" id="op3"></button>
-                    <button id="answer"></button>
-                </div>
+            <div id="multi-choice">
+                <button class="option" id="op1"></button>
+                <button class="option" id="op2"></button>
+                <button class="option" id="op3"></button>
+                <button id="answer"></button>
             </div>
-        </body>
-
-        <footer>
-
-        </footer>
-        
-        <script src="./assets/js/script.js"></script>
+        </div>
     </body>
+
+    <footer>
+
+    </footer>
+
+    <script src="./assets/js/script.js"></script>
+</body>
+
 </html>

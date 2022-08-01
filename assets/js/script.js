@@ -6,6 +6,7 @@ var op2 = document.querySelector("#op2");
 var op3 = document.querySelector("#op3");
 var answer = document.querySelector("#answer");
 var secondsLeft = 60;
+var scorecard =0;
 
 // const delay = async (ms = 1000) =>
 //   new Promise(resolve => setTimeout(resolve, ms));
@@ -27,6 +28,7 @@ var questions = [
     answer: "A string is zero or more characters written inside quotes"
   },
   {
+    //this questions seems to get skipped ran out of time to debug
     question: "What is the range for Math.floor(Math.random() * 10);",
     op1: "Returns a random integer from 0 to 9",
     op2: "Returns a random decimal from 0 to 11",
@@ -53,6 +55,7 @@ var questions = [
 function setTimer() {
   //unhide card element when start button clicked
   document.getElementById("card").style.display = "block";
+  btn.setAttribute("id", "startClick");
   runCards();
   var timerInterval = setInterval(function () {
     secondsLeft--;
@@ -70,44 +73,45 @@ function setTimer() {
   }, 1000);
 }
 
-const  runCards=() =>{
+const runCards = () => {
 
-    document.getElementById("question").textContent = questions[i].question;
-    op1.textContent = questions[i].op1;
-    op2.textContent = questions[i].op2;
-    op3.textContent = questions[i].op3;
-    op1.addEventListener("click",function(){checkAnswer(op1.innerHTML)});
-    op2.addEventListener("click",function(){checkAnswer(op2.innerHTML)});
-    op3.addEventListener("click",function(){checkAnswer(op3.innerHTML)});
-    //await delay(secondsLeft/.001);//convert Seconds to ms
-    
-}
-
-function checkAnswer(input){
-if (input===questions[i].answer && i < questions.length){
-
-  window.alert("Correct!");
-
-  op1.removeEventListener("click",function(){checkAnswer(op1.innerHTML)});
-  op2.removeEventListener("click",function(){checkAnswer(op2.innerHTML)});
-  op3.removeEventListener("click",function(){checkAnswer(op3.innerHTML)});
-  i++;
+  document.getElementById("question").textContent = questions[i].question;
+  op1.textContent = questions[i].op1;
+  op2.textContent = questions[i].op2;
+  op3.textContent = questions[i].op3;
+  op1.addEventListener("click", function () { checkAnswer(op1.innerHTML) });
+  op2.addEventListener("click", function () { checkAnswer(op2.innerHTML) });
+  op3.addEventListener("click", function () { checkAnswer(op3.innerHTML) });
+  //await delay(secondsLeft/.001);//convert Seconds to ms
 
 }
-else if (input!==questions[i].answer && i < questions.length){
 
-  window.alert("WRONG: "+questions[i].answer);
+function checkAnswer(input) {
+  if (input === questions[i].answer && i < questions.length) {
 
-  op1.removeEventListener("click",function(){checkAnswer(op1.innerHTML)});
-  op2.removeEventListener("click",function(){checkAnswer(op2.innerHTML)});
-  op3.removeEventListener("click",function(){checkAnswer(op3.innerHTML)});
-  i++
+    window.alert("Correct!");
 
-}
-else{
-  window.alert("out of questions");
-  document.getElementById("card").style.display = "none";
-}
-//i++;
-setTimeout(runCards(),0);
+    op1.removeEventListener("click", function () { checkAnswer(op1.innerHTML) });
+    op2.removeEventListener("click", function () { checkAnswer(op2.innerHTML) });
+    op3.removeEventListener("click", function () { checkAnswer(op3.innerHTML) });
+    i++;
+    scorecard++;
+  }
+  else if (input !== questions[i].answer && i < questions.length) {
+
+    window.alert("WRONG: " + questions[i].answer);
+
+    op1.removeEventListener("click", function () { checkAnswer(op1.innerHTML) });
+    op2.removeEventListener("click", function () { checkAnswer(op2.innerHTML) });
+    op3.removeEventListener("click", function () { checkAnswer(op3.innerHTML) });
+    secondsLeft--;//remove 1 second for wrong answer. 
+    i++
+
+  }
+  else {
+    window.alert("out of questions");
+    document.getElementById("card").style.display = "none";
+  }
+  //i++;
+  setTimeout(runCards(), 0);
 }
