@@ -6,7 +6,7 @@ var op2 = document.querySelector("#op2");
 var op3 = document.querySelector("#op3");
 var answer = document.querySelector("#answer");
 var secondsLeft = 60;
-var scorecard =0;
+var scorecard = 0;
 
 // const delay = async (ms = 1000) =>
 //   new Promise(resolve => setTimeout(resolve, ms));
@@ -73,45 +73,50 @@ function setTimer() {
   }, 1000);
 }
 
-const runCards = () => {
-
-  document.getElementById("question").textContent = questions[i].question;
-  op1.textContent = questions[i].op1;
-  op2.textContent = questions[i].op2;
-  op3.textContent = questions[i].op3;
-  op1.addEventListener("click", function () { checkAnswer(op1.innerHTML) });
-  op2.addEventListener("click", function () { checkAnswer(op2.innerHTML) });
-  op3.addEventListener("click", function () { checkAnswer(op3.innerHTML) });
-  //await delay(secondsLeft/.001);//convert Seconds to ms
-
-}
-
-function checkAnswer(input) {
-  if (input === questions[i].answer && i < questions.length) {
-
-    window.alert("Correct!");
-
-    op1.removeEventListener("click", function () { checkAnswer(op1.innerHTML) });
-    op2.removeEventListener("click", function () { checkAnswer(op2.innerHTML) });
-    op3.removeEventListener("click", function () { checkAnswer(op3.innerHTML) });
-    i++;
-    scorecard++;
-  }
-  else if (input !== questions[i].answer && i < questions.length) {
-
-    window.alert("WRONG: " + questions[i].answer);
-
-    op1.removeEventListener("click", function () { checkAnswer(op1.innerHTML) });
-    op2.removeEventListener("click", function () { checkAnswer(op2.innerHTML) });
-    op3.removeEventListener("click", function () { checkAnswer(op3.innerHTML) });
-    secondsLeft--;//remove 1 second for wrong answer. 
-    i++
-
-  }
-  else {
+function runCards() {
+  if (i < questions.length) {
+    document.getElementById("question").textContent = questions[i].question;
+    op1.textContent = questions[i].op1;
+    op2.textContent = questions[i].op2;
+    op3.textContent = questions[i].op3;
+    op1.addEventListener("click", checkAnswer);
+    op2.addEventListener("click", checkAnswer);
+    op3.addEventListener("click", checkAnswer);
+    //await delay(secondsLeft/.001);//convert Seconds to ms
+  } else {
     window.alert("out of questions");
     document.getElementById("card").style.display = "none";
   }
-  //i++;
-  setTimeout(runCards(), 0);
+
+}
+
+function checkAnswer() {
+  if (i < questions.length) {
+    if (this.textContent === questions[i].answer) {
+
+      window.alert("Correct!");
+
+      op1.removeEventListener("click", checkAnswer);
+      op2.removeEventListener("click", checkAnswer);
+      op3.removeEventListener("click", checkAnswer);
+      i++;
+      scorecard++;
+    }
+    else if (this.textContent !== questions[i].answer) {
+
+      window.alert("WRONG: " + questions[i].answer);
+
+      op1.removeEventListener("click", checkAnswer);
+      op2.removeEventListener("click", checkAnswer);
+      op3.removeEventListener("click", checkAnswer);
+      secondsLeft--;//remove 1 second for wrong answer. 
+      i++
+
+    }
+    //i++;
+    runCards();
+  } else {
+    window.alert("out of questions");
+    document.getElementById("card").style.display = "none";
+  }
 }
