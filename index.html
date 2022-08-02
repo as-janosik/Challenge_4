@@ -28,8 +28,23 @@
                 <button class="option" id="op1"></button>
                 <button class="option" id="op2"></button>
                 <button class="option" id="op3"></button>
-                <button id="answer"></button>
+                <!--<button id="answer"></button>-->
             </div>
+        </div>
+        <div id="saveCard">
+            <h2>Leader Board</h2>
+            <form method="POST">
+                <div class="input-group">
+                    <label for="user-initials">User Initials</label>
+                    <input type="text" name="initials" id="initials" placeholder="AZ" />
+                </div>
+                <div class="input-group">
+                    <label for="score">score: </label>
+                    <span id="scoreSpan"></span>
+                </div>
+                <div id="msg"></div>
+                <button id="savebtn">Save Score</button>
+            </form>
         </div>
     </body>
 

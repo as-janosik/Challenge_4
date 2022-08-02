@@ -1,17 +1,19 @@
 var btn = document.querySelector("button");
 btn.addEventListener("click", setTimer);
+
+var setScore = document.querySelector("#scoreSpan");//will be used to display score at end
+//variables for question cards
 var question = document.querySelector("#question");
 var op1 = document.querySelector("#op1");
 var op2 = document.querySelector("#op2");
 var op3 = document.querySelector("#op3");
-var answer = document.querySelector("#answer");
-var secondsLeft = 60;
+//var answer = document.querySelector("#answer");//not used
+var secondsLeft = 90;
 var scorecard = 0;
 
-// const delay = async (ms = 1000) =>
-//   new Promise(resolve => setTimeout(resolve, ms));
 var timeEl = document.querySelector(".showtime");
-var i = 0;
+var i = 0;//used to loop through array
+//array of questions for quiz
 var questions = [
   {
     question: "What is an array?",
@@ -28,7 +30,6 @@ var questions = [
     answer: "A string is zero or more characters written inside quotes"
   },
   {
-    //this questions seems to get skipped ran out of time to debug
     question: "What is the range for Math.floor(Math.random() * 10);",
     op1: "Returns a random integer from 0 to 9",
     op2: "Returns a random decimal from 0 to 11",
@@ -55,17 +56,24 @@ var questions = [
 function setTimer() {
   //unhide card element when start button clicked
   document.getElementById("card").style.display = "block";
+  //apply css to start button after click
   btn.setAttribute("id", "startClick");
-  runCards();
+  runCards();//run function to populate quiz card
+  //set timer in stylized start button
   var timerInterval = setInterval(function () {
     secondsLeft--;
     btn.textContent = secondsLeft;
 
-    if (secondsLeft === 0) {
+    if (secondsLeft <= 0) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
-
       document.getElementById("card").style.display = "none";
+      document.getElementById("saveCard").style.display = "block";
+      var saveBtn = document.querySelector("#savebtn");
+      saveBtn.addEventListener("click", localSave);
+
+      //set score innerHTML
+      setScore.textContent = scorecard;
 
       btn.textContent = ("game over!");
     }
@@ -85,7 +93,8 @@ function runCards() {
     //await delay(secondsLeft/.001);//convert Seconds to ms
   } else {
     window.alert("out of questions");
-    document.getElementById("card").style.display = "none";
+    //document.getElementById("card").style.display = "none";
+    secondsLeft = 0;//set timer to zero after all questions answered. 
   }
 
 }
@@ -119,4 +128,11 @@ function checkAnswer() {
     window.alert("out of questions");
     document.getElementById("card").style.display = "none";
   }
+}
+
+function localSave(){
+  //save local
+  //save to ul li element
+  //add element to html score board. 
+
 }
